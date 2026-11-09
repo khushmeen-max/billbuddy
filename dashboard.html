@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard - BillBuddy</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <div class="dashboard-logo">
+            💰 BillBuddy
+        </div>
+
+        <nav>
+
+            <a href="dashboard.html" class="active">
+                🏠 Dashboard
+            </a>
+
+            <a href="#expenses">
+                💸 Expenses
+            </a>
+
+            <a href="#bills">
+                🧾 Bills
+            </a>
+
+            <a href="#reports">
+                📊 Reports
+            </a>
+
+        </nav>
+
+        <button class="logout-btn" onclick="logout()">
+            🚪 Logout
+        </button>
+
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+
+    <main class="dashboard-main">
+
+        <header class="dashboard-header">
+
+            <div>
+                <h1>Dashboard</h1>
+                <p id="welcomeUser">
+                    Welcome back! 👋
+                </p>
+            </div>
+
+            <div class="profile">
+                👤
+            </div>
+
+        </header>
+
+
+        <!-- STAT CARDS -->
+
+        <section class="stats">
+
+            <div class="stat-card">
+                <span>💸</span>
+                <h3>Total Expenses</h3>
+                <h2 id="totalExpenses">₹0</h2>
+            </div>
+
+            <div class="stat-card">
+                <span>🧾</span>
+                <h3>Total Bills</h3>
+                <h2 id="totalBills">₹0</h2>
+            </div>
+
+            <div class="stat-card">
+                <span>⏳</span>
+                <h3>Pending Bills</h3>
+                <h2 id="pendingBills">₹0</h2>
+            </div>
+
+            <div class="stat-card">
+                <span>📅</span>
+                <h3>This Month</h3>
+                <h2 id="monthlyExpenses">₹0</h2>
+            </div>
+
+        </section>
+
+
+        <!-- ADD EXPENSE -->
+
+        <section class="dashboard-section" id="expenses">
+
+            <div class="section-title">
+
+                <div>
+                    <h2>Expenses</h2>
+                    <p>Track your daily spending.</p>
+                </div>
+
+            </div>
+
+
+            <div class="expense-form">
+
+                <input
+                    type="text"
+                    id="expenseName"
+                    placeholder="Expense name"
+                >
+
+                <input
+                    type="number"
+                    id="expenseAmount"
+                    placeholder="Amount (₹)"
+                >
+
+                <select id="expenseCategory">
+
+                    <option value="Food">🍔 Food</option>
+
+                    <option value="Travel">🚗 Travel</option>
+
+                    <option value="Shopping">🛍 Shopping</option>
+
+                    <option value="Bills">🧾 Bills</option>
+
+                    <option value="Entertainment">🎬 Entertainment</option>
+
+                    <option value="Other">📦 Other</option>
+
+                </select>
+
+                <input
+                    type="date"
+                    id="expenseDate"
+                >
+
+                <button
+                    class="primary-btn"
+                    onclick="addExpense()"
+                >
+                    + Add Expense
+                </button>
+
+            </div>
+
+
+            <!-- EXPENSE LIST -->
+
+            <div class="expense-list">
+
+                <h3>Recent Expenses</h3>
+
+                <div id="expenseList">
+
+                    <p class="empty-message">
+                        No expenses added yet.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+<!-- BILLS -->
+
+<section class="dashboard-section" id="bills">
+
+    <div class="section-title">
+
+        <div>
+            <h2>Bills</h2>
+            <p>Manage your upcoming and paid bills.</p>
+        </div>
+
+    </div>
+
+
+   <label for="reminderDays">🔔 Remind me before the due date</label>
+
+<select id="reminderDays">
+    <option value="0">On the due date</option>
+    <option value="1" selected>1 day before</option>
+    <option value="3">3 days before</option>
+    <option value="7">7 days before</option>
+</select>
+
+    <!-- ADD BILL -->
+
+    <div class="expense-form">
+
+        <input
+            type="text"
+            id="billName"
+            placeholder="Bill name"
+        >
+
+        <input
+            type="number"
+            id="billAmount"
+            placeholder="Amount (₹)"
+        >
+
+        <input
+            type="date"
+            id="billDueDate"
+        >
+
+        <select id="billStatus">
+
+            <option value="Pending">
+                ⏳ Pending
+            </option>
+
+            <option value="Paid">
+                ✅ Paid
+            </option>
+
+        </select>
+
+        <button
+            class="primary-btn"
+            onclick="addBill()"
+        >
+            + Add Bill
+        </button>
+
+    </div>
+
+
+    <!-- BILL LIST -->
+
+    <div class="expense-list">
+
+        <h3>Your Bills</h3>
+
+        <div id="billList">
+
+            <p class="empty-message">
+                No bills added yet.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+  <!-- SMART BUDGET PLANNER -->
+
+<section class="budget-planner">
+    <h2>💰 Smart Budget Planner</h2>
+    <p>Plan your money, protect your savings! 🌷</p>
+
+```
+<form id="budgetForm">
+    <label for="monthlyIncome">Monthly Available Money (₹)</label>
+    <input
+        type="number"
+        id="monthlyIncome"
+        placeholder="e.g. 15000"
+        min="0"
+        step="0.01"
+        required
+    >
+
+    <label for="savingsGoal">Monthly Savings Target (₹)</label>
+    <input
+        type="number"
+        id="savingsGoal"
+        placeholder="e.g. 3000"
+        min="0"
+        step="0.01"
+        required
+    >
+
+    <button type="submit">✨ Calculate My Budget</button>
+</form>
+
+<div id="budgetResult" aria-live="polite"></div>
+```
+
+</section>
+
+
+<!-- REPORTS -->
+
+<section class="dashboard-section" id="reports">
+
+    <div class="section-title">
+        <div>
+            <h2>Reports</h2>
+            <p>Understand where your money is going.</p>
+        </div>
+    </div>
+
+
+    <div class="monthly-filter">
+    <label for="reportMonth">📅 Select Month:</label>
+    <select id="reportMonth">
+        <option value="0">January</option>
+        <option value="1">February</option>
+        <option value="2">March</option>
+        <option value="3">April</option>
+        <option value="4">May</option>
+        <option value="5">June</option>
+        <option value="6">July</option>
+        <option value="7">August</option>
+        <option value="8">September</option>
+        <option value="9">October</option>
+        <option value="10">November</option>
+        <option value="11">December</option>
+    </select>
+
+```
+<label for="reportYear">📆 Select Year:</label>
+<select id="reportYear"></select>
+```
+
+</div>
+;
+
+    <div class="report-grid">
+
+        <div class="report-card">
+            <div class="report-icon">💰</div>
+            <div>
+                <h3>Total Spending</h3>
+                <p id="reportTotal">₹0</p>
+            </div>
+        </div>
+
+        <div class="report-card">
+            <div class="report-icon">📅</div>
+            <div>
+                <h3>This Month</h3>
+                <p id="reportMonthly">₹0</p>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="expense-list">
+
+        <h3>Spending by Category</h3>
+
+        <div id="categoryReport">
+            <p class="empty-message">
+                Add some expenses to see your report.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+        
+             <footer class="dashboard-footer">
+            © 2026 BillBuddy
+        </footer>
+
+    </main>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
